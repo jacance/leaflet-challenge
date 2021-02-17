@@ -26,7 +26,7 @@ legend.onAdd = function(map) {
     div.innerHTML += '<i style="background: #ffcc66"></i><span>30-50</span><br>';
     div.innerHTML += '<i style="background: #ffcc00"></i><span>50-70</span><br>';
     div.innerHTML += '<i style="background: #ff9900"></i><span>70-90</span><br>';
-    div.innerHTML += '<i style="background: #00ff00"></i><span>90+</span><br>';
+    div.innerHTML += '<i style="background: #ff3300"></i><span>90+</span><br>';
 
     return div;
 };
