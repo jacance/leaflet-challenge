@@ -4,6 +4,7 @@ var myMap = L.map("mapid", {
     zoom: 6
   });
 
+
 // Add a tile layer to map (background map image)
 L.tileLayer("https://api.mapbox.com/styles/v1/{id}/tiles/{z}/{x}/{y}?access_token={accessToken}", {
     attribution: "© <a href='https://www.mapbox.com/about/maps/'>Mapbox</a> © <a href='http://www.openstreetmap.org/copyright'>OpenStreetMap</a> <strong><a href='https://www.mapbox.com/map-feedback/' target='_blank'>Improve this map</a></strong>",
@@ -13,6 +14,24 @@ L.tileLayer("https://api.mapbox.com/styles/v1/{id}/tiles/{z}/{x}/{y}?access_toke
     id: "mapbox/streets-v11",
     accessToken: API_KEY
 }).addTo(myMap);
+
+
+// Map legend
+var legend = L.control({ position: "bottomright"});
+legend.onAdd = function(map) {
+    var div = L.DomUtil.create("div", "legend");
+    div.innerHTML += "<h4>Magnitude</h4>"
+    div.innerHTML += '<i style="background: #00ff00"></i><span>-10-10</span><br>';
+    div.innerHTML += '<i style="background: #ccff66"></i><span>10-30</span><br>';
+    div.innerHTML += '<i style="background: #ffcc66"></i><span>30-50</span><br>';
+    div.innerHTML += '<i style="background: #ffcc00"></i><span>50-70</span><br>';
+    div.innerHTML += '<i style="background: #ff9900"></i><span>70-90</span><br>';
+    div.innerHTML += '<i style="background: #00ff00"></i><span>90+</span><br>';
+
+    return div;
+};
+legend.addTo(myMap)
+
 
 // Url for analysis
 const queryUrl = "https://earthquake.usgs.gov/earthquakes/feed/v1.0/summary/all_week.geojson"
@@ -61,33 +80,12 @@ d3.json(queryUrl, function(response) {
              "<br><b>Depth:</b> " + feature.geometry.coordinates[2]);
           },
 
+
         // 
     // Add entire geoJSON layer to map
     }).addTo(myMap);
 
+    
+
 });
-
-
-   
-
-// Create a map using Leaflet that plots all of the earthquakes from your data set based on their longitude and latitude.
-
-
-// Your data markers should reflect the magnitude of the earthquake by their size and and depth of the earth quake by color.
-//Earthquakes with higher magnitudes should appear larger and earthquakes with greater depth should appear darker in color.
-
-
-// HINT the depth of the earth can be found as the third coordinate for each earthquake.
-
-
-// Include popups that provide additional information about the earthquake when a marker is clicked.
-
-
-// Create a legend that will provide context for your map data.
-
-
-// Your visualization should look something like the map above.
-
-
-
 
